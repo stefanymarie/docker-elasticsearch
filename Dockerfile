@@ -16,4 +16,6 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 9200
 
+VOLUME ["/opt/elasticsearch/data"]
+
 CMD supervisord -n
