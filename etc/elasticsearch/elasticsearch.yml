@@ -1,0 +1,16 @@
+---
+path:
+  logs: /data/log
+  data: /opt/elasticsearch/data
+
+index:
+    store:
+        type: memory
+
+indices.fielddata.cache.size: 40%
+indices.breaker.fielddata.limit: 60%
+indices.breaker.request.limit: 40%
+indices.breaker.total.limit: 70%
+cluster.name: musashi_es_production
+node.name: elasticsearch_mc
+cluster.routing.allocation.same_shard.host: true
