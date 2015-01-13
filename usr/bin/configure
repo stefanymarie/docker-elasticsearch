@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import yaml
+import os
+
+
+output_path = '/etc/elasticsearch/elasticsearch.yml'
+
+
+d = {
+	'path': {
+		'logs': os.environ.get('LOGS_PATH','/data/log'),
+		'data': os.environ.get('DATA_PATH','/opt/elasticsearch/data')
+	},
+	'index': {
+		'store': {
+			'type': os.environ.get('INDEX_STORE_TYPE','memory')
+		}
+	},
+	'indices.fielddata.cache.size': os.environ.get('INDICES_FIELDDATA_CACHE_SIZE','40%'),
+	'indices.breaker.fielddata.limit': os.environ.get('INDICES_BREAKER_FIELDDATA_LIMIT','60%'),
+	'indices.breaker.request.limit': os.environ.get('INDICES_BREAKER_REQUEST_LIMIT','40%'),
+	'indices.breaker.total.limit': os.environ.get('INDICES_BREAKER_TOTAL_LIMIT','70%'),
+	'cluster.name': os.environ.get('CLUSTER_NAME','musashi_es_production'),
+	'node.name': os.environ.get('NODE_NAME','elasticsearch_mc'),
+	'cluster.routing.allocation.same_shard.host': True,
+}
+
+f = open(output_path, 'w')
+f.write(yaml.dump(d))
